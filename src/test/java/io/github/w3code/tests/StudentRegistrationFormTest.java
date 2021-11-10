@@ -15,38 +15,42 @@ public class StudentRegistrationFormTest extends TestBase {
             faker.number().numberBetween(1, 28),
             faker.number().numberBetween(0, 11),
             faker.number().numberBetween(1900, 2008),
+            "Accounting",
             faker.number().numberBetween(0, 2),
-            faker.address().fullAddress()
+            "test.jpg",
+            faker.address().fullAddress(),
+            "NCR",
+            "Delhi"
     );
 
     @Test
     void selenideFormTest() {
         registrationPage
                 .openPage()
-                .typeFirstName(student.firstName)
-                .typeLastName(student.lastName)
-                .typeEmail(student.email)
-                .checkGender(student.gender)
-                .typeMobile(student.mobile)
-                .setDate(student.dayBirth, student.monthBirth, student.yearBirth)
-                .typeSubject(student.subject)
-                .checkHobby(student.hobby)
-                .uploadPicture(student.picture)
-                .typeAddress(student.currentAddress)
-                .selectState(student.state)
-                .selectCity(student.city)
+                .typeFirstName(student.getFirstName())
+                .typeLastName(student.getLastName())
+                .typeEmail(student.getEmail())
+                .checkGender(student.getGender())
+                .typeMobile(student.getMobile())
+                .setDate(student.getDayBirth(), student.getMonthBirth(), student.getYearBirth())
+                .typeSubject(student.getSubject())
+                .checkHobby(student.getHobby())
+                .uploadPicture(student.getPicture())
+                .typeAddress(student.getCurrentAddress())
+                .selectState(student.getState())
+                .selectCity(student.getCity())
                 .submitData()
                 .checkIsModalWindowOpened()
-                .checkResultsValue("Student Name", student.firstName + ' ' + student.lastName)
-                .checkResultsValue("Student Email", student.email)
-                .checkResultsValue("Gender", student.gender)
-                .checkResultsValue("Mobile", student.mobile)
-                .checkResultsValue("Date of Birth", student.dateOfBirth())
-                .checkResultsValue("Subjects", student.subject)
-                .checkResultsValue("Hobbies", student.hobby)
-                .checkResultsValue("Picture", student.picture)
-                .checkResultsValue("Address", student.currentAddress)
-                .checkResultsValue("State and City", student.state + " " + student.city)
+                .checkResultsValue("Student Name", student.getFirstName() + ' ' + student.getLastName())
+                .checkResultsValue("Student Email", student.getEmail())
+                .checkResultsValue("Gender", student.getGender())
+                .checkResultsValue("Mobile", student.getMobile())
+                .checkResultsValue("Date of Birth", student.getDateOfBirth())
+                .checkResultsValue("Subjects", student.getSubject())
+                .checkResultsValue("Hobbies", student.getHobby())
+                .checkResultsValue("Picture", student.getPicture())
+                .checkResultsValue("Address", student.getCurrentAddress())
+                .checkResultsValue("State and City", student.getState() + " " + student.getCity())
                 .closeModalWindow()
                 .modalCloseCheck();
     }

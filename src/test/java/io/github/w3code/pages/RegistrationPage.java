@@ -32,10 +32,8 @@ public class RegistrationPage {
             bodyElement = $(byTagName("body"));
 
     public ElementsCollection
-            userGender = $$(".custom-control-label"),
-            userHobby = $$(".custom-control-label");
-
-    //public static CalendarComponent calendar = new CalendarComponent();
+            userGender = $$x("//label[starts-with(@for, 'gender-radio')]"),
+            userHobby = $$x("//label[starts-with(@for, 'hobbies-checkbox')]");
 
     //actions
     public RegistrationPage openPage() {
