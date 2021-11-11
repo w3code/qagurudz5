@@ -4,10 +4,14 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.github.w3code.pages.components.CalendarComponent;
 
+import java.util.Map;
+
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byTagName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegistrationPage {
     //locators and elements
@@ -33,7 +37,8 @@ public class RegistrationPage {
 
     public ElementsCollection
             userGender = $$x("//label[starts-with(@for, 'gender-radio')]"),
-            userHobby = $$x("//label[starts-with(@for, 'hobbies-checkbox')]");
+            userHobby = $$x("//label[starts-with(@for, 'hobbies-checkbox')]"),
+            resultLines = $$(".table-responsive tbody tr");
 
     //actions
     public RegistrationPage openPage() {
@@ -114,9 +119,13 @@ public class RegistrationPage {
         return this;
     }
 
-
-    public RegistrationPage checkResultsValue(String key, String value) {
-        resultsTable.$(byText(key)).parent().shouldHave(text(value));
+    public RegistrationPage checkResultsValue(Map expectedData) {
+        ElementsCollection lines = resultLines.snapshot();
+        for (SelenideElement line : lines) {
+            String key = line.$("td").text();
+            String actualValue = line.$("td", 1).text();
+            assertEquals(expectedData.get(key), actualValue, "message");
+        }
         return this;
     }
 
@@ -128,6 +137,5 @@ public class RegistrationPage {
     public void modalCloseCheck() {
         bodyElement.shouldNotHave(cssClass("modal-open"));
     }
-
 
 }

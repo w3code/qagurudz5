@@ -15,8 +15,8 @@ public class StudentData {
     String currentAddress;
     String state;
     String city;
-    String[] months = new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    String[] hobbies = new String[] {"Sports", "Reading", "Music"};
+    String[] months = new String[]{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    String[] hobbies = new String[]{"Sports", "Reading", "Music"};
 
     public String getFirstName() {
         return firstName;
@@ -55,7 +55,7 @@ public class StudentData {
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile.replaceAll("\\D","").substring(0, 10);
+        this.mobile = mobile.replaceAll("\\D", "").substring(0, 10);
     }
 
     public String getDayBirth() {
@@ -131,12 +131,14 @@ public class StudentData {
     }
 
     //Создаем метод добавления нуля к числу рождения, если оно однозначное. Используется в валидации.
-    public String getDateOfBirth() {
+
+    public String getBirthDate() {
         if (dayBirth.length() == 1) {
-            dayBirth = '0' + dayBirth;
+            return '0' + dayBirth + ' ' + monthBirth + ',' + yearBirth;
         }
         return dayBirth + ' ' + monthBirth + ',' + yearBirth;
     }
+
     StudentData(String firstName, String lastName, String email, String gender, String mobile, int dayBirth, int monthBirth, int yearBirth, String subject, int hobbyNum, String picture, String currentAddress, String state, String city) {
         setFirstName(firstName);
         setLastName(lastName);

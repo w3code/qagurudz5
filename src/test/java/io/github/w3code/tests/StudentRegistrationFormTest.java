@@ -3,6 +3,9 @@ package io.github.w3code.tests;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class StudentRegistrationFormTest extends TestBase {
     Faker faker = new Faker();
 
@@ -23,6 +26,19 @@ public class StudentRegistrationFormTest extends TestBase {
             "Delhi"
     );
 
+    Map<String, String> expectedData = new HashMap<String, String>() {{
+        put("Student Name", student.getFirstName() + ' ' + student.getLastName());
+        put("Student Email", student.getEmail());
+        put("Gender", student.getGender());
+        put("Mobile", student.getMobile());
+        put("Date of Birth", student.getBirthDate());
+        put("Subjects", student.getSubject());
+        put("Hobbies", student.getHobby());
+        put("Picture", student.getPicture());
+        put("Address", student.getCurrentAddress());
+        put("State and City", student.getState() + " " + student.getCity());
+    }};
+
     @Test
     void selenideFormTest() {
         registrationPage
@@ -41,16 +57,7 @@ public class StudentRegistrationFormTest extends TestBase {
                 .selectCity(student.getCity())
                 .submitData()
                 .checkIsModalWindowOpened()
-                .checkResultsValue("Student Name", student.getFirstName() + ' ' + student.getLastName())
-                .checkResultsValue("Student Email", student.getEmail())
-                .checkResultsValue("Gender", student.getGender())
-                .checkResultsValue("Mobile", student.getMobile())
-                .checkResultsValue("Date of Birth", student.getDateOfBirth())
-                .checkResultsValue("Subjects", student.getSubject())
-                .checkResultsValue("Hobbies", student.getHobby())
-                .checkResultsValue("Picture", student.getPicture())
-                .checkResultsValue("Address", student.getCurrentAddress())
-                .checkResultsValue("State and City", student.getState() + " " + student.getCity())
+                .checkResultsValue(expectedData)
                 .closeModalWindow()
                 .modalCloseCheck();
     }
