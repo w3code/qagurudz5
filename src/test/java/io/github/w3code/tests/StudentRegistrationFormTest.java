@@ -1,6 +1,7 @@
 package io.github.w3code.tests;
 
 import com.github.javafaker.Faker;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -40,6 +41,7 @@ public class StudentRegistrationFormTest extends TestBase {
     }};
 
     @Test
+    @DisplayName("Student registration form test")
     void selenideFormTest() {
         registrationPage
                 .openPage()
