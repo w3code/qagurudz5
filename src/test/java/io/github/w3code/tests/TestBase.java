@@ -12,8 +12,10 @@ public class TestBase {
 
     @BeforeAll
     static void startMaximized() {
+        String selenoid_url = System.getProperty("selenoid_url", "url");
+
         Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
+        Configuration.remote = "https://user1:1234@" + selenoid_url;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
