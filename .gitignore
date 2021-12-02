@@ -1,3 +1,12 @@
+.gradle/
+.idea/
+build/
+gradle/
+gradlew
+gradlew.bat
+settings.gradle
+*.properties
+
 # Compiled class file
 *.class
 
@@ -10,9 +19,6 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Properties files
-*.properties
-
 # Package Files #
 *.jar
 *.war
@@ -21,8 +27,8 @@
 *.zip
 *.tar.gz
 *.rar
-*.iml
 
+<<<<<<< HEAD
 # Project gen files
 .idea
 .allure/
@@ -42,3 +48,7 @@ target/
 /gradlew
 /gradlew.bat
 settings.gradle
+=======
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+>>>>>>> parent of 50dd688 (gitignore fixes)
